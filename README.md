@@ -1,17 +1,15 @@
 ## Last updated: 10/9/2017
 
 
-# bigip-onboarding
-Ansible role to automate onboarding configuration on a BIG-IP. The role will configure the following
-* BIG-IP hostname
-* BIG-IP SSH Banner text
-* NTP servers
-* DNS servers
-* Configure VLAN's and Self-IPs
+# Summary 
+Ansible role to automate provisioning on a foo. The role will configure the following
+* task one
+* task two
+* task etc.
 
 ## Requirements
 * This role requires Ansible 2.4
-* BIG-IP is licensed
+* foo is licensed
 * Packages to be installed
   - pip install f5-sdk
   - pip install bigsuds
@@ -21,61 +19,38 @@ Ansible role to automate onboarding configuration on a BIG-IP. The role will con
 The variables that can be passed to this role and a brief description about them are as follows.
 
 ```
-username: admin                                     //BIG-IP username
-password: admin                                     //BIG-IP password
+username: admin                                     //username
+password: admin                                     //password
 
-banner_text: "--Welcome to Onboarding BIGIP--"      //Banner when user SSH's into the BIG-IP
+hostname: 'ansibleManaged-bigip.local'              //hostname
 
-hostname: 'ansibleManaged-bigip.local'              //BIG-IP hostname
-
-ntp_servers:                                        //NTP servers configured on BIG-IP
+ntp_servers:                                        //NTP servers 
  - '172.27.1.1'
  - '172.27.1.2'
 
-dns_servers:                                        //DNS servers configured on BIG-IP
+dns_servers:                                        //DNS servers 
  - '8.8.8.8'
  - '4.4.4.4'
 
-dns_search_domains:                                 //DNS serach domains configured on BIG-IP
+dns_search_domains:                                 //DNS search domains 
  - 'local'
  - 'localhost'
 
-ip_version: 4                                       //DNS protocol version
-
-vlan_information:                                   //VLAN configured on BIG-IP
- - name: 'External'                                 //Example: VLAN 'External' with VLAN tag 10
-   tag: '10'                                                   tag 10 tagged to interface 1.1
-   interface: '1.1'                                 
- - name: 'Internal'                                 //Example: VLAN 'Internal' with VLAN tag 11 
-   tag: '11'                                                   tagged to interface 1.2
-   interface: '1.2'
-
-selfip_information:                                 //Self-IP configured on the BIG-IP
- - name: 'External-SelfIP'                                        
-   address: '10.168.68.5'                                         
-   netmask: '255.255.255.0'
-   vlan: 'External'
-   allow_service: 'default'
- - name: 'Internal-SelfIP'
-   address: '192.168.68.5'
-   netmask: '255.255.255.0'
-   vlan: 'Internal'
-   allow_service: 'default'
 
 ```
 
 ## Example Playbook
 ```
-- hosts: bigips
+- hosts: servers 
   gather_facts: false
   roles:
-  - { role: f5devcentral.bigip-onboarding }
+  - { role: role_name }
 
 ```
 
 ## Credential storage
 
-Because this role includes usage of credentials to access your BIG-IP, I recommend that you supply these variables in an ansible-vault encrypted file.
+Because this role includes usage of credentials to access your foo, I recommend that you supply these variables in an ansible-vault encrypted file.
 
 This can be supplied out-of-band of this role
 
@@ -86,10 +61,10 @@ Steps:
 For more information refer to: http://docs.ansible.com/ansible/latest/playbooks_vault.html
 
 ## Certificate validation
-To validate the SSL certificates of the BIG-IP REST API
+To validate the SSL certificates of the foo REST API
 - set validate_certs: true
 - Generate a public private key pair
-- Store the public key on BIG-IP (https://support.f5.com/csp/article/K13454#bigipsshdaccept)
+- Store the public key on foo (https://support.f5.com/csp/article/K13454#bigipsshdaccept)
 
 ## Credits
 https://github.com/F5Networks/f5-ansible
